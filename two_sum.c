@@ -1,7 +1,7 @@
 /*
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int j = 0;
+int j = 0,*po;
 
 int *create(int k, int j)
 {
@@ -13,19 +13,18 @@ int *create(int k, int j)
 
 int *twoSum(int *nums, int numsSize, int target, int *returnSize)
 {
-    int *po, sum = nums[j];
+    int diff = target-nums[j],k = 0;
     for (int i = j + 1; i < numsSize; i++)
     {
-        if ((sum + nums[i]) == target)
+        if (diff == nums[i])
         {
-            sum += nums[i];
             po = create(i, j);
             *returnSize = 2;
+            k = 1;
             break;
         }
     }
-    int diff = target - sum;
-    if (diff != 0)
+    if (k == 0)
     {
         j++;
         return twoSum(nums, numsSize, target, returnSize);
